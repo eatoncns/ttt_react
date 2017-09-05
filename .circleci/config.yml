@@ -20,3 +20,12 @@ jobs:
             - ./node_modules
 
       - run: npm test
+
+      - deploy:
+          name: Deploy to S3 if tests pass and branch is master
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              npm run build && aws s3 sync build s3://tttreact-hosting-mobilehub-2140333729 --delete
+            else
+              echo "Not master branch so not deploying"
+            fi
