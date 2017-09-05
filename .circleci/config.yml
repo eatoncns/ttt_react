@@ -25,7 +25,7 @@ jobs:
           name: Deploy to S3 if tests pass and branch is master
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              apt-get update && apt-get install -y awscli && npm run build && aws s3 sync build s3://tttreact-hosting-mobilehub-2140333729 --delete
+              apt-get -y -qq update && apt-get -y -qq install awscli && npm run build && aws s3 sync build s3://tttreact-hosting-mobilehub-2140333729 --delete
             else
               echo "Not master branch so not deploying"
             fi
