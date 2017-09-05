@@ -26,8 +26,8 @@ jobs:
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
               npm run build
-              apt install python-pip python-dev
-              pip install awscli --upgrade
+              sudo apt install python-pip python-dev
+              sudo pip install awscli --upgrade
               ./deploy.sh
             else
               echo "Not master branch so not deploying"
