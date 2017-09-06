@@ -6,28 +6,39 @@ function Space(props) {
   );
 }
 
-function Row(props) {
-  var spaces = [];
-  for (var i = 0; i < props.dimension; i++) {
-    spaces.push(<Space key={i} />);
+class Row extends Component {
+
+  renderSpaces(dimension) {
+    var spaces = [];
+    for (var i = 0; i < dimension; i++) {
+      spaces.push(<Space key={i} />);
+    }
+    return spaces;
   }
-  return (
-    <div className="row">
-      {spaces}
-    </div>
-  );
+
+  render() {
+    return (
+      <div className="row">
+        {this.renderSpaces(this.props.dimension)}
+      </div>
+    );
+  }
 }
 
 class Board extends Component {
-  render() {
-    const dimension = this.props.dimension;
+
+  renderRows(dimension) {
     var rows = [];
     for (var i = 0; i < dimension; i++) {
       rows.push(<Row key={i} dimension={dimension} />);
     }
+    return rows; 
+  }
+
+  render() {
     return (
       <div className="board">
-        {rows}
+        {this.renderRows(this.props.dimension)}
       </div>
     );
   }
