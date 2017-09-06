@@ -45,4 +45,5 @@ class Board extends Component {
   }
 }
 
+export {Row, Space};
 export default Board;
