@@ -1,8 +1,9 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import './Board.css';
 
 function Space(props) {
   return (
-    <button></button>
+    <button className='btn cell btn-cell'></button>
   );
 }
 

@@ -5,9 +5,11 @@ import './App.css';
 class App extends Component {
   render() {
     return (
-      <div className="App">
+      <div className="container">
         <h1>Tic-Tac-Toe</h1>
-        <Board dimension={3} />
+        <div className="container">
+          <Board dimension={3} />
+        </div>
       </div>
     );
   }
