@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/node:7.10
+      - image: eatoncns/cci-node-aws:0.0.1
 
     working_directory: ~/repo
 
@@ -26,8 +26,6 @@ jobs:
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
               npm run build
-              sudo apt install python-pip python-dev
-              sudo pip install awscli --upgrade
               ./deploy.sh
             else
               echo "Not master branch so not deploying"
