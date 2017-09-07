@@ -9,28 +9,34 @@ function Space(props) {
 
 class Board extends Component {
 
-  buildBlah(dimension, contents) {
+  renderElements(numElements, contents) {
     var elements = [];
-    for (var i = 0; i < dimension; i++) {
+    for (var i = 0; i < numElements; i++) {
       elements.push(contents(i));
     }
     return elements;
-
-  }
-  renderSpaces(dimension) {
-    return this.buildBlah(dimension, (i) => <Space key={i} />)
   }
 
-  renderRows(dimension) {
-    return this.buildBlah(dimension, (i) => 
-      <div key={i} className={'row'}>{this.renderSpaces(dimension)}</div>
+  renderSpace(index) {
+    return (
+      <Space key={index} handleClick={() => this.props.handleClick(index)} />
     );
   }
 
+  renderRow(index, dimension, spaces) {
+      const rowStart = index*dimension;
+      const rowEnd = rowStart + dimension;
+      return (<div key={index} className={'row'}>{spaces.slice(rowStart, rowEnd)}</div>);
+  }
+
   render() {
+    const dimension = this.props.dimension;
+    const size = dimension * dimension;
+    const spaces = this.renderElements(size, (i) => this.renderSpace(i));
+    const rows = this.renderElements(dimension, (i) => this.renderRow(i, dimension, spaces));
     return (
       <div className="board">
-        {this.renderRows(this.props.dimension)}
+        {rows}
       </div>
     );
   }

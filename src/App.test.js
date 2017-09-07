@@ -10,8 +10,21 @@ describe('<App />', () => {
     ReactDOM.render(<App />, div);
   });
 
-  it ('renders a board', () => {
-    const app = shallow(<App />);
-    expect(app.find(BoardContainer)).toHaveLength(1);
+  describe('component rendering', () => {
+    let app;
+    let boardContainers;
+
+    beforeEach(() => {
+      app = shallow(<App />);
+      boardContainers = app.find(BoardContainer);
+    })
+    
+    it ('renders a board container', () => {
+      expect(boardContainers).toHaveLength(1);
+    });
+
+    it ('passes a dimension to board container', () => {
+      expect(boardContainers.first().prop('dimension')).toBeDefined(); 
+    });
   });
 });

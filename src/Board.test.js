@@ -4,18 +4,25 @@ import { shallow } from 'enzyme';
 import Board, { Space } from './Board';
 
 describe('<Board />', () => {
+  let dimension;
   let board;
 
   beforeEach(() => {
-    board = shallow(<Board dimension={4}/>);
+    dimension = 4;
+    const handleClick = jest.fn();
+    board = shallow(<Board dimension={dimension} handleClick={handleClick}/>);
   });
 
   it ('renders dimension rows', () => {
-    expect(board.find('div.row')).toHaveLength(4);
+    expect(board.find('div.row')).toHaveLength(dimension);
   });
 
   it ('renders dimension^2 spaces', () => {
-    expect(board.find(Space)).toHaveLength(16);
+    expect(board.find(Space)).toHaveLength(dimension*dimension);
+  });
+
+  it ('passes click handler to spaces', () => {
+    expect(board.find(Space).first().prop('handleClick')).toBeDefined();
   });
 });
 

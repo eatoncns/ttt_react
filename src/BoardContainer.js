@@ -3,13 +3,13 @@ import Board from './Board.js'
 
 class BoardContainer extends Component {
   
-  handleClick() {
-      
+  handleClick(i) {
+     console.log(i); 
   }
 
   render() {
     return (
-      <Board dimension={this.props.dimension} handleClick={() => this.handleClick()}/>
+      <Board dimension={this.props.dimension} handleClick={(i) => this.handleClick(i)}/>
     );
   }
 }
