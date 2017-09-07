@@ -24,19 +24,25 @@ describe('<Board />', () => {
 });
 
 describe('<Space />', () => {
+  let mark;
   let handleClick;
+  let space;
 
   beforeEach(() => {
+    mark = 'X';
     handleClick = jest.fn();
+    space = shallow(<Space mark={mark} handleClick={handleClick}/>);
   });
 
   it ('renders a button', () => {
-    const space = shallow(<Space handleClick={handleClick}/>);
     expect(space.find('button')).toHaveLength(1);
   });
 
+  it ('sets button text to mark', () => {
+    expect(space.find('button').text()).toEqual(mark);
+  });
+
   it ('calls given handler when button clicked', () => {
-    const space = shallow(<Space handleClick={handleClick}/>);
     space.find('button').simulate('click');
     expect(handleClick).toHaveBeenCalled();
   });

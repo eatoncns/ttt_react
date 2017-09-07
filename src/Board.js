@@ -4,7 +4,7 @@ import './Board.css';
 
 function Space(props) {
   return (
-    <button className='btn cell btn-cell' onClick={() => props.handleClick()}></button>
+    <button className='btn cell btn-cell' onClick={() => props.handleClick()}>{props.mark}</button>
   );
 }
 
@@ -20,7 +20,7 @@ class Board extends Component {
 
   renderSpace(index) {
     return (
-      <Space key={index} handleClick={() => this.props.handleClick(index)} />
+      <Space key={index} mark={'X'} handleClick={() => this.props.handleClick(index)} />
     );
   }
 
@@ -44,6 +44,7 @@ class Board extends Component {
 }
 
 Space.propTypes = {
+  mark: PropTypes.string.isRequired,
   handleClick: PropTypes.func.isRequired
 };
 
