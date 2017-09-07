@@ -5,12 +5,14 @@ import Board, { Space } from './Board';
 
 describe('<Board />', () => {
   let dimension;
+  let marks;
   let board;
 
   beforeEach(() => {
-    dimension = 4;
+    dimension = 3;
+    marks = Array(dimension*dimension).fill('');
     const handleClick = jest.fn();
-    board = shallow(<Board dimension={dimension} handleClick={handleClick}/>);
+    board = shallow(<Board marks={marks} handleClick={handleClick}/>);
   });
 
   it ('renders dimension rows', () => {
