@@ -10,7 +10,7 @@ class BoardContainer extends Component {
   }
 
   render() {
-    const setMark = (index) => this.setState(BoardState.update(this.state, index, 'X'));
+    const setMark = (index) => this.setState(BoardState.update(this.state, index));
     return React.createElement(Board, {marks: this.state.marks, handleClick: setMark});
   }
 }
