@@ -1,21 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Board from './Board.js'
+import Board from './Board'
+import * as BoardState from './BoardState'
 
 class BoardContainer extends Component {
   constructor(props) {
     super(props);
-    this.state = { marks: Array(props.dimension*props.dimension).fill('') }
-  }
-  
-  handleClick(index) {
-    const marks = this.state.marks.slice();
-    marks[index] = 'X';
-    this.setState({ marks: marks });
+    this.state = BoardState.init(props.dimension); 
   }
 
   render() {
-    return React.createElement(Board, {marks: this.state.marks, handleClick: (i) => this.handleClick(i)})
+    const setMark = (index) => this.setState(BoardState.update(this.state, index, 'X'));
+    return React.createElement(Board, {marks: this.state.marks, handleClick: setMark});
   }
 }
 
