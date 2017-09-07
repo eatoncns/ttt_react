@@ -17,23 +17,25 @@ describe('<Board />', () => {
     expect(board.find('div.row')).toHaveLength(dimension);
   });
 
-  it ('renders dimension^2 spaces', () => {
-    expect(board.find(Space)).toHaveLength(dimension*dimension);
-  });
-
-  it ('passes click handler to spaces', () => {
-    expect(board.find(Space).first().prop('handleClick')).toBeDefined();
+  it ('renders dimension spaces in each row', () => {
+    const row = board.find('div.row').first();
+    expect(row.find(Space)).toHaveLength(dimension);
   });
 });
 
 describe('<Space />', () => {
+  let handleClick;
+
+  beforeEach(() => {
+    handleClick = jest.fn();
+  });
+
   it ('renders a button', () => {
-    const space = shallow(<Space />);
+    const space = shallow(<Space handleClick={handleClick}/>);
     expect(space.find('button')).toHaveLength(1);
   });
 
   it ('calls given handler when button clicked', () => {
-    const handleClick = jest.fn();
     const space = shallow(<Space handleClick={handleClick}/>);
     space.find('button').simulate('click');
     expect(handleClick).toHaveBeenCalled();

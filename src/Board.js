@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import './Board.css';
 
 function Space(props) {
@@ -41,6 +42,15 @@ class Board extends Component {
     );
   }
 }
+
+Space.propTypes = {
+  handleClick: PropTypes.func.isRequired
+};
+
+Board.propTypes = {
+  dimension: PropTypes.number.isRequired,
+  handleClick: PropTypes.func.isRequired
+};
 
 export {Space};
 export default Board;
