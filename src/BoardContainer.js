@@ -8,9 +8,7 @@ class BoardContainer extends Component {
   }
 
   render() {
-    return (
-      <Board dimension={this.props.dimension} handleClick={(i) => this.handleClick(i)}/>
-    );
+    return React.createElement(Board, {dimension: this.props.dimension, handleClick: (i) => this.handleClick(i)})
   }
 }
 
