@@ -1,16 +1,17 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { shallow } from 'enzyme';
 import Board, { Space } from './Board';
 
 describe('<Board />', () => {
   let dimension;
+  let marks;
   let board;
 
   beforeEach(() => {
-    dimension = 4;
+    dimension = 3;
+    marks = Array(dimension*dimension).fill('');
     const handleClick = jest.fn();
-    board = shallow(<Board dimension={dimension} handleClick={handleClick}/>);
+    board = shallow(<Board marks={marks} handleClick={handleClick}/>);
   });
 
   it ('renders dimension rows', () => {
@@ -24,19 +25,25 @@ describe('<Board />', () => {
 });
 
 describe('<Space />', () => {
+  let mark;
   let handleClick;
+  let space;
 
   beforeEach(() => {
+    mark = 'X';
     handleClick = jest.fn();
+    space = shallow(<Space mark={mark} handleClick={handleClick}/>);
   });
 
   it ('renders a button', () => {
-    const space = shallow(<Space handleClick={handleClick}/>);
     expect(space.find('button')).toHaveLength(1);
   });
 
+  it ('sets button text to mark', () => {
+    expect(space.find('button').text()).toEqual(mark);
+  });
+
   it ('calls given handler when button clicked', () => {
-    const space = shallow(<Space handleClick={handleClick}/>);
     space.find('button').simulate('click');
     expect(handleClick).toHaveBeenCalled();
   });

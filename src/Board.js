@@ -4,7 +4,7 @@ import './Board.css';
 
 function Space(props) {
   return (
-    <button className='btn cell btn-cell' onClick={() => props.handleClick()}></button>
+    <button className='btn cell btn-cell' onClick={() => props.handleClick()}>{props.mark}</button>
   );
 }
 
@@ -20,7 +20,7 @@ class Board extends Component {
 
   renderSpace(index) {
     return (
-      <Space key={index} handleClick={() => this.props.handleClick(index)} />
+      <Space key={index} mark={this.props.marks[index]} handleClick={() => this.props.handleClick(index)} />
     );
   }
 
@@ -31,8 +31,8 @@ class Board extends Component {
   }
 
   render() {
-    const dimension = this.props.dimension;
-    const size = dimension * dimension;
+    const size = this.props.marks.length;
+    const dimension = Math.sqrt(size);
     const spaces = this.renderElements(size, (i) => this.renderSpace(i));
     const rows = this.renderElements(dimension, (i) => this.renderRow(i, dimension, spaces));
     return (
@@ -44,11 +44,12 @@ class Board extends Component {
 }
 
 Space.propTypes = {
+  mark: PropTypes.string.isRequired,
   handleClick: PropTypes.func.isRequired
 };
 
 Board.propTypes = {
-  dimension: PropTypes.number.isRequired,
+  marks: PropTypes.arrayOf(PropTypes.string),
   handleClick: PropTypes.func.isRequired
 };
 
