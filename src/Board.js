@@ -3,47 +3,44 @@ import './Board.css';
 
 function Space(props) {
   return (
-    <button className='btn cell btn-cell'></button>
+    <button className='btn cell btn-cell' onClick={() => props.handleClick()}></button>
   );
-}
-
-class Row extends Component {
-
-  renderSpaces(dimension) {
-    var spaces = [];
-    for (var i = 0; i < dimension; i++) {
-      spaces.push(<Space key={i} />);
-    }
-    return spaces;
-  }
-
-  render() {
-    return (
-      <div className="row">
-        {this.renderSpaces(this.props.dimension)}
-      </div>
-    );
-  }
 }
 
 class Board extends Component {
 
-  renderRows(dimension) {
-    var rows = [];
-    for (var i = 0; i < dimension; i++) {
-      rows.push(<Row key={i} dimension={dimension} />);
+  renderElements(numElements, contents) {
+    var elements = [];
+    for (var i = 0; i < numElements; i++) {
+      elements.push(contents(i));
     }
-    return rows; 
+    return elements;
+  }
+
+  renderSpace(index) {
+    return (
+      <Space key={index} handleClick={() => this.props.handleClick(index)} />
+    );
+  }
+
+  renderRow(index, dimension, spaces) {
+      const rowStart = index*dimension;
+      const rowEnd = rowStart + dimension;
+      return (<div key={index} className={'row'}>{spaces.slice(rowStart, rowEnd)}</div>);
   }
 
   render() {
+    const dimension = this.props.dimension;
+    const size = dimension * dimension;
+    const spaces = this.renderElements(size, (i) => this.renderSpace(i));
+    const rows = this.renderElements(dimension, (i) => this.renderRow(i, dimension, spaces));
     return (
       <div className="board">
-        {this.renderRows(this.props.dimension)}
+        {rows}
       </div>
     );
   }
 }
 
-export {Row, Space};
+export {Space};
 export default Board;
