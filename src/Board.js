@@ -3,37 +3,28 @@ import './Board.css';
 
 function Space(props) {
   return (
-    <button className='btn cell btn-cell'></button>
+    <button className='btn cell btn-cell' onClick={() => props.handleClick()}></button>
   );
-}
-
-class Row extends Component {
-
-  renderSpaces(dimension) {
-    var spaces = [];
-    for (var i = 0; i < dimension; i++) {
-      spaces.push(<Space key={i} />);
-    }
-    return spaces;
-  }
-
-  render() {
-    return (
-      <div className="row">
-        {this.renderSpaces(this.props.dimension)}
-      </div>
-    );
-  }
 }
 
 class Board extends Component {
 
-  renderRows(dimension) {
-    var rows = [];
+  buildBlah(dimension, contents) {
+    var elements = [];
     for (var i = 0; i < dimension; i++) {
-      rows.push(<Row key={i} dimension={dimension} />);
+      elements.push(contents(i));
     }
-    return rows; 
+    return elements;
+
+  }
+  renderSpaces(dimension) {
+    return this.buildBlah(dimension, (i) => <Space key={i} />)
+  }
+
+  renderRows(dimension) {
+    return this.buildBlah(dimension, (i) => 
+      <div key={i} className={'row'}>{this.renderSpaces(dimension)}</div>
+    );
   }
 
   render() {
@@ -45,5 +36,5 @@ class Board extends Component {
   }
 }
 
-export {Row, Space};
+export {Space};
 export default Board;
