@@ -11,10 +11,6 @@ describe ('BoardState', () => {
     it ('initialises an empty board', () => {
       expect(BoardState.init(dimension).marks).toEqual(['', '', '', '', '', '', '', '', '']);
     }); 
-
-    it ('sets first player to X', () => {
-      expect(BoardState.init(dimension).currentPlayer).toEqual('X');
-    });
   });
 
   describe('#update', () => {
@@ -30,10 +26,11 @@ describe ('BoardState', () => {
       expect(BoardState.update(boardState, index).marks).toEqual(['', '', '', 'X', '', '', '', '', '']);
     });
 
-    it ('switches the current player', () => {
-      const newBoardState = BoardState.update(boardState, index);
-      expect(newBoardState.currentPlayer).toEqual('O');  
-      expect(BoardState.update(newBoardState, index+1).currentPlayer).toEqual('X');
+    it ('alternates between players', () => {
+      const s1 = BoardState.update(boardState, index);
+      const s2 = BoardState.update(s1, index+1);
+      const s3 = BoardState.update(s2, index+2);
+      expect(s3.marks).toEqual(['', '', '', 'X', 'O', 'X', '', '', '']);
     });
   });
 
