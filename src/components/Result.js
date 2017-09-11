@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ResultLogic } from './ResultLogic';
+import { ResultLogic } from 'ttt/ResultLogic';
 
 function Result(props) {
   if (!ResultLogic.isGameOver(props.marks))

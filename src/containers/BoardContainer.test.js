@@ -1,8 +1,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import BoardContainer from './BoardContainer';
-import Board from './Board';
-import Result from './Result';
+import Board from 'components/Board';
+import Result from 'components/Result';
 
 describe('<BoardContainer />', () => {
   let boardContainer;
