@@ -2,13 +2,23 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import BoardContainer from './BoardContainer';
 import Board from './Board';
+import Result from './Result';
 
 describe('<BoardContainer />', () => {
+  let boardContainer;
+
+  beforeEach(() => {
+    boardContainer = shallow(<BoardContainer dimension={4} />);
+  });
 
   it('renders a board', () => {
-    const boardContainer = shallow(<BoardContainer dimension={4} />);
     const boardComponents = boardContainer.find(Board);
     expect(boardComponents).toHaveLength(1);
+  });
+
+  it ('renders a result', () => {
+    const resultComponents = boardContainer.find(Result);
+    expect(resultComponents).toHaveLength(1);
   });
 
 });

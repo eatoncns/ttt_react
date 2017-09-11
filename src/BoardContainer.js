@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Board from './Board'
-import * as BoardState from './BoardState'
+import Board from './Board';
+import Result from './Result';
+import * as BoardState from './BoardState';
 
 class BoardContainer extends Component {
   constructor(props) {
@@ -11,12 +12,17 @@ class BoardContainer extends Component {
 
   render() {
     const setMark = (index) => this.setState(BoardState.update(this.state, index));
-    return React.createElement(Board, {marks: this.state.marks, handleClick: setMark});
+    return (
+      <div className="container">
+        <Board marks={ this.state.marks } handleClick={ setMark } />
+        <Result marks={ this.state.marks }/>
+      </div>
+    );
   }
 }
 
 BoardContainer.propTypes = {
   dimension: PropTypes.number
-}
+};
 
 export default BoardContainer;
