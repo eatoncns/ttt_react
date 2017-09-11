@@ -5,6 +5,18 @@ export const ResultLogic = (function() {
     return (winningLinePresent(board) || allSpacesTaken(board));
   }
 
+  me.isDrawn = function(board) {
+    return (allSpacesTaken(board) && !winningLinePresent(board));
+  }
+
+  me.winningMark = function(board) {
+    const winningLine = lines(board).find(line => isWinningLine(board, line));
+    if (winningLine !== undefined) {
+      return board[winningLine[0]];
+    }
+    return null;
+  }
+
   function winningLinePresent(board) {
     return lines(board).some(line => isWinningLine(board, line));  
   }
