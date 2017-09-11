@@ -44,8 +44,9 @@ export const ResultLogic = (function() {
 
   function columnsFrom(rows) {
     var cols = [];
+    const extractCol = row => row[colIndex];
     for (var colIndex = 0; colIndex < rows.length; colIndex++) {
-      const col = rows.map(row => row[colIndex]); 
+      const col = rows.map(extractCol); 
       cols.push(col);
     }
     return cols;
