@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { shallow } from 'enzyme';
 import App from './App';
-import BoardContainer from './BoardContainer';
+import BoardContainer from 'containers/BoardContainer';
 
 describe('<App />', () => {
   it('renders without crashing', () => {
