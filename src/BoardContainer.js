@@ -13,7 +13,7 @@ class BoardContainer extends Component {
   render() {
     const setMark = (index) => this.setState(BoardState.update(this.state, index));
     return (
-      <div>
+      <div className="container">
         <Board marks={ this.state.marks } handleClick={ setMark } />
         <Result marks={ this.state.marks }/>
       </div>

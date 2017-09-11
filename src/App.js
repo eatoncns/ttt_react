@@ -7,9 +7,7 @@ class App extends Component {
     return (
       <div className="container">
         <h1>Tic-Tac-Toe</h1>
-        <div className="container">
-          <BoardContainer dimension={3} />
-        </div>
+        <BoardContainer dimension={3} />
       </div>
     );
   }
