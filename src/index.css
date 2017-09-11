@@ -95,11 +95,28 @@ h1 {
 
 /*
  * ==================
- * Forms
+ * Buttons
  * ==================
  */
 
-input,
-select {
-  font: 300 16px/22px "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+.btn {
+  border-radius: 5px;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 400;
+  letter-spacing: .5px;
+  margin: 0;
+}
+
+.btn-default {
+  border: 0;
+  background: #b5b5b5;
+  padding: 11px 30px;
+  font-size: 14px;
+  width: 150px;
+  height: 40px;
+}
+
+.btn-default:hover {
+  background: #707070;
 }
