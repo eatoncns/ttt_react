@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ResultLogic } from './ResultLogic'
+import { ResultLogic } from './ResultLogic';
 
 function Result(props) {
   if (!ResultLogic.isGameOver(props.marks))
@@ -12,7 +12,10 @@ function Result(props) {
     : ResultLogic.winningMark(props.marks) + " wins! Congrats!"; 
 
   return(
-    <p>{message}</p>
+    <div>
+      <p>{message}</p>
+      <button className={"btn btn-default"}>New Game</button>
+    </div>
   );
 }
 

@@ -7,6 +7,7 @@ describe('<Result />', () => {
     const marks = ['X', '','','O','','','','',''];
     const result = shallow(<Result marks={ marks } />);
     expect(result.find('p')).toHaveLength(0);
+    expect(result.find('input')).toHaveLength(0);
   });
 
   it('renders a winning message for won game', () => {
@@ -19,5 +20,11 @@ describe('<Result />', () => {
     const marks = ['X','X','O','O','O','X','X','X','O']; 
     const result = shallow(<Result marks={ marks } />);
     expect(result.find('p').text()).toContain('draw');
+  });
+
+  it('renders a new game button when game is over', () => {
+    const marks = ['X','X','O','O','O','X','X','X','O']; 
+    const result = shallow(<Result marks={ marks } />);
+    expect(result.find('button').text()).toBe('New Game'); 
   });
 });
