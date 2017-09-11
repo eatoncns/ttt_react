@@ -14,13 +14,14 @@ function Result(props) {
   return(
     <div>
       <p>{message}</p>
-      <button className={"btn btn-default"}>New Game</button>
+      <button className={"btn btn-default"} onClick={props.handleClick}>New Game</button>
     </div>
   );
 }
 
 Result.propTypes = {
-  marks: PropTypes.arrayOf(PropTypes.string).isRequired
+  marks: PropTypes.arrayOf(PropTypes.string).isRequired,
+  handleClick: PropTypes.func.isRequired
 };
 
 export default Result;
