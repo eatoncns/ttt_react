@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {},
   "scripts": {
-    "start": "webpack-dev-server --content-base dist",
+    "start": "webpack-dev-server --content-base build",
     "build": "webpack",
     "test": "NODE_PATH=src jest"
   },
@@ -23,5 +23,10 @@
     "style-loader": "^0.18.2",
     "webpack": "^3.5.6",
     "webpack-dev-server": "^2.7.1"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(css|less)$": "<rootDir>/.mocks/styleMock.js"
+    }
   }
 }
