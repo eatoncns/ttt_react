@@ -31,8 +31,8 @@ export const ResultLogic = (function() {
 
   function rowsFrom(dimension) {
     const spaces = range(dimension*dimension);
-    var rows = [];
-    for (var rowIndex = 0; rowIndex < spaces.length; rowIndex += dimension) {
+    let rows = [];
+    for (let rowIndex = 0; rowIndex < spaces.length; rowIndex += dimension) {
       rows.push(spaces.slice(rowIndex, rowIndex + dimension));
     }
     return rows;
@@ -43,9 +43,10 @@ export const ResultLogic = (function() {
   }
 
   function columnsFrom(rows) {
-    var cols = [];
+    let cols = [];
+    let colIndex = 0;
     const extractCol = row => row[colIndex];
-    for (var colIndex = 0; colIndex < rows.length; colIndex++) {
+    for ( ; colIndex < rows.length; colIndex++) {
       const col = rows.map(extractCol); 
       cols.push(col);
     }

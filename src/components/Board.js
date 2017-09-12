@@ -11,8 +11,8 @@ function Space(props) {
 class Board extends Component {
 
   renderElements(numElements, contents) {
-    var elements = [];
-    for (var i = 0; i < numElements; i++) {
+    let elements = [];
+    for (let i = 0; i < numElements; i++) {
       elements.push(contents(i));
     }
     return elements;
