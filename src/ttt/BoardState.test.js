@@ -1,4 +1,4 @@
-import * as BoardState from './BoardState';
+import { BoardState } from './BoardState';
 
 describe ('BoardState', () => {
   let dimension;
