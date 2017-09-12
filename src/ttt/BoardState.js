@@ -1,16 +1,24 @@
-export const init = (dimension) => ({ marks: Array(dimension*dimension).fill('') });
+export const BoardState = (function() {
+  const me = {};
 
-export const update = (boardState, index) => {
-  const newBoardMarks = boardState.marks.slice();
-  newBoardMarks[index] = currentPlayer(boardState);
-  return { marks: newBoardMarks };
-};
+  me.init = (dimension) => ({ marks: Array(dimension*dimension).fill('') });
 
-const currentPlayer = (boardState) => {
-  const populatedSpaces = boardState.marks.filter((mark) => mark !== '');
-  return isEven(populatedSpaces.length) ? 'X' : 'O';
-};
+  me.update = (boardState, index) => {
+    const newBoardMarks = boardState.marks.slice();
+    newBoardMarks[index] = currentPlayer(boardState);
+    return { marks: newBoardMarks };
+  };
 
-const isEven = (number) => {
-  return (number % 2) === 0;
-};
+  const currentPlayer = (boardState) => {
+    const populatedSpaces = boardState.marks.filter((mark) => mark !== '');
+    return isEven(populatedSpaces.length) ? 'X' : 'O';
+  };
+
+  const isEven = (number) => {
+    return (number % 2) === 0;
+  };
+
+  return me;
+}());
+
+
