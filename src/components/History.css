@@ -1,0 +1,34 @@
+.Collapsible {
+  margin-top: 22px; 
+}
+.Collapsible__trigger {
+  display: block;
+  font-weight: 400;
+  position: relative;
+  border: 1px solid white;
+  padding: 10px;
+  background: #b5b5b5;
+}
+
+.Collapsible__trigger.is-open, .Collapsible__trigger:hover {
+  background-color: #707070;
+}
+
+.Collapsible__trigger:after {
+  content: '\002B';
+  font-weight: bold;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  display: block;
+}
+
+.Collapsible__trigger.is-open:after {
+  content: "\2212";
+}
+
+.Collapsible__contentInner {
+  padding: 10px;
+  border: 1px solid $lightGrey;
+  border-top: 0;
+}

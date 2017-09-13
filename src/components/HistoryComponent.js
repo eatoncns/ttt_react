@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Collapsible from 'react-collapsible';
+import './History.css';
 
 class HistoryComponent extends Component {
   render() {
