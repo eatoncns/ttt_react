@@ -3,6 +3,7 @@ import { shallow } from 'enzyme';
 import BoardContainer from './BoardContainer';
 import Board from 'components/Board';
 import Result from 'components/Result';
+import HistoryComponent from 'components/HistoryComponent';
 
 describe('<BoardContainer />', () => {
   let boardContainer;
@@ -16,9 +17,14 @@ describe('<BoardContainer />', () => {
     expect(boardComponents).toHaveLength(1);
   });
 
-  it ('renders a result', () => {
+  it('renders a result', () => {
     const resultComponents = boardContainer.find(Result);
     expect(resultComponents).toHaveLength(1);
+  });
+
+  it('renders game history component', () => {
+    const historyComponents = boardContainer.find(HistoryComponent);
+    expect(historyComponents).toHaveLength(1);
   });
 
 });

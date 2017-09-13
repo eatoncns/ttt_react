@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Board from 'components/Board';
 import Result from 'components/Result';
+import HistoryComponent from 'components/HistoryComponent';
 import { BoardState } from 'ttt/BoardState';
 
 class BoardContainer extends Component {
@@ -17,6 +18,7 @@ class BoardContainer extends Component {
       <div className="container">
         <Board marks={ this.state.marks } handleClick={ setMark } />
         <Result marks={ this.state.marks } handleClick={ resetBoard }/>
+        <HistoryComponent />
       </div>
     );
   }
