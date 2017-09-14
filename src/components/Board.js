@@ -4,7 +4,7 @@ import { ResultLogic } from 'ttt/ResultLogic'
 import './Board.css';
 
 function Space(props) {
-  const disabled = props.mark !== '';
+  const disabled = (props.mark !== '' || props.gameOver);
   return (
     <button className='btn cell btn-cell' disabled={disabled} onClick={() => props.handleClick()}>{props.mark}</button>
   );

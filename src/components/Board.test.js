@@ -59,4 +59,11 @@ describe('<Space />', () => {
     space = shallow(<Space mark={mark} handleClick={handleClick} gameOver={gameOver}/>);
     expect(space.find('button').prop('disabled')).toBe(false);
   });
+
+  it('disables button when game is over', () => {
+    mark = '';
+    gameOver = true;
+    space = shallow(<Space mark={mark} handleClick={handleClick} gameOver={gameOver}/>);
+    expect(space.find('button').prop('disabled')).toBe(true);
+  });
 })
