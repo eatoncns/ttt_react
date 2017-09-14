@@ -28,11 +28,13 @@ describe('<Space />', () => {
   let mark;
   let handleClick;
   let space;
+  let gameOver;
 
   beforeEach(() => {
     mark = 'X';
     handleClick = jest.fn();
-    space = shallow(<Space mark={mark} handleClick={handleClick}/>);
+    gameOver = false;
+    space = shallow(<Space mark={mark} handleClick={handleClick} gameOver={gameOver}/>);
   });
 
   it ('renders a button', () => {
@@ -46,5 +48,22 @@ describe('<Space />', () => {
   it ('calls given handler when button clicked', () => {
     space.find('button').simulate('click');
     expect(handleClick).toHaveBeenCalled();
+  });
+
+  it('disbles button when marked', () => {
+    expect(space.find('button').prop('disabled')).toBe(true);
+  });
+
+  it('enables button when not marked', () => {
+    mark = '';
+    space = shallow(<Space mark={mark} handleClick={handleClick} gameOver={gameOver}/>);
+    expect(space.find('button').prop('disabled')).toBe(false);
+  });
+
+  it('disables button when game is over', () => {
+    mark = '';
+    gameOver = true;
+    space = shallow(<Space mark={mark} handleClick={handleClick} gameOver={gameOver}/>);
+    expect(space.find('button').prop('disabled')).toBe(true);
   });
 })
