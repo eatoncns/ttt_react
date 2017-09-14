@@ -49,4 +49,14 @@ describe('<Space />', () => {
     space.find('button').simulate('click');
     expect(handleClick).toHaveBeenCalled();
   });
+
+  it('disbles button when marked', () => {
+    expect(space.find('button').prop('disabled')).toBe(true);
+  });
+
+  it('enables button when not marked', () => {
+    mark = '';
+    space = shallow(<Space mark={mark} handleClick={handleClick} gameOver={gameOver}/>);
+    expect(space.find('button').prop('disabled')).toBe(false);
+  });
 })
