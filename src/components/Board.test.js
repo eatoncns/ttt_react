@@ -29,12 +29,17 @@ describe('<Space />', () => {
   let handleClick;
   let space;
   let gameOver;
+  let winningSpace;
 
   beforeEach(() => {
     mark = 'X';
     handleClick = jest.fn();
     gameOver = false;
-    space = shallow(<Space mark={mark} handleClick={handleClick} gameOver={gameOver}/>);
+    winningSpace = false;
+    space = shallow(<Space mark={mark}
+                           handleClick={handleClick}
+                           gameOver={gameOver}
+                           winningSpace={winningSpace} />);
   });
 
   it ('renders a button', () => {
@@ -56,14 +61,34 @@ describe('<Space />', () => {
 
   it('enables button when not marked', () => {
     mark = '';
-    space = shallow(<Space mark={mark} handleClick={handleClick} gameOver={gameOver}/>);
+    space = shallow(<Space mark={mark}
+                           handleClick={handleClick}
+                           gameOver={gameOver}
+                           winningSpace={winningSpace} />);
     expect(space.find('button').prop('disabled')).toBe(false);
   });
 
   it('disables button when game is over', () => {
     mark = '';
     gameOver = true;
-    space = shallow(<Space mark={mark} handleClick={handleClick} gameOver={gameOver}/>);
+    space = shallow(<Space mark={mark}
+                           handleClick={handleClick}
+                           gameOver={gameOver}
+                           winningSpace={winningSpace} />);
     expect(space.find('button').prop('disabled')).toBe(true);
+  });
+
+  it('adds class to winning space', () => {
+    gameOver = true;
+    winningSpace = true;
+    space = shallow(<Space mark={mark}
+                           handleClick={handleClick}
+                           gameOver={gameOver}
+                           winningSpace={winningSpace} />);
+    expect(space.find('button').prop('className')).toContain('winning-cell');
+  });
+
+  it('does not have winning space class by default', () => {
+    expect(space.find('button').prop('className')).not.toContain('winning-cell');
   });
 })

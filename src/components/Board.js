@@ -5,8 +5,12 @@ import './Board.css';
 
 function Space(props) {
   const disabled = (props.mark !== '' || props.gameOver);
+  let className = 'btn cell btn-cell';
+  if (props.winningSpace) {
+    className += ' winning-cell';
+  }
   return (
-    <button className='btn cell btn-cell' disabled={disabled} onClick={() => props.handleClick()}>{props.mark}</button>
+    <button className={className} disabled={disabled} onClick={() => props.handleClick()}>{props.mark}</button>
   );
 }
 
@@ -20,12 +24,14 @@ class Board extends Component {
     return elements;
   }
 
-  renderSpace(index, gameOver) {
+  renderSpace(index, gameOver, winningSpaces) {
+    const winningSpace = (winningSpaces.indexOf(index) !== -1);
     return (
       <Space key={index} 
              mark={this.props.marks[index]}
              handleClick={() => this.props.handleClick(index)}
-             gameOver={gameOver} />
+             gameOver={gameOver}
+             winningSpace={winningSpace} />
     );
   }
 
@@ -39,7 +45,8 @@ class Board extends Component {
     const size = this.props.marks.length;
     const dimension = Math.sqrt(size);
     const gameOver = ResultLogic.isGameOver(this.props.marks);
-    const spaces = this.renderElements(size, (i) => this.renderSpace(i, gameOver));
+    const winningSpaces = ResultLogic.winningSpaces(this.props.marks);
+    const spaces = this.renderElements(size, (i) => this.renderSpace(i, gameOver, winningSpaces));
     const rows = this.renderElements(dimension, (i) => this.renderRow(i, dimension, spaces));
     return (
       <div className="board">
@@ -52,7 +59,8 @@ class Board extends Component {
 Space.propTypes = {
   mark: PropTypes.string.isRequired,
   handleClick: PropTypes.func.isRequired,
-  gameOver: PropTypes.bool.isRequired
+  gameOver: PropTypes.bool.isRequired,
+  winningSpace: PropTypes.bool.isRequired
 };
 
 Board.propTypes = {

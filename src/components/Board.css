@@ -27,3 +27,7 @@
 .btn-cell:disabled {
   color: black;
 }
+
+.winning-cell {
+  background: #707070;
+}
