@@ -54,4 +54,18 @@ describe('ResultLogic', () => {
       expect(ResultLogic.winningMark(inProgressBoard)).toBeNull();
     });
   });
+
+  describe('#winningSpaces', () => {
+    it('returns empty array for in progress board', () => {
+      expect(ResultLogic.winningSpaces(inProgressBoard)).toEqual([]);
+    });
+
+    it('returns empty array for drawn board', () => {
+      expect(ResultLogic.winningSpaces(drawnBoard)).toEqual([]);
+    });
+
+    it('returns winningSpaces from won board', () => {
+      expect(ResultLogic.winningSpaces(wonBoard)).toEqual([0, 1, 2]);
+    });
+  });
 });

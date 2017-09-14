@@ -17,6 +17,14 @@ export const ResultLogic = (function() {
     return null;
   }
 
+  me.winningSpaces = function(board) {
+    const winningLine = lines(board).find(line => isWinningLine(board, line));
+    if (winningLine !== undefined) {
+      return winningLine;
+    }
+    return [];
+  }
+
   function winningLinePresent(board) {
     return lines(board).some(line => isWinningLine(board, line));  
   }
