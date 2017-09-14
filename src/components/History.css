@@ -1,6 +1,7 @@
 .Collapsible {
-  margin-top: 22px; 
+  margin: 22px auto; 
   font-size: 15px;
+  width: 900px;
 }
 .Collapsible__trigger {
   display: block;
