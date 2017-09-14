@@ -6,10 +6,12 @@ import './App.css';
 class App extends Component {
   render() {
     return (
-      <div className="container">
-        <h1>Tic-Tac-Toe</h1>
+      <div>
+        <div className="container">
+          <h1>Tic-Tac-Toe</h1>
+          <BoardContainer dimension={3} />
+        </div>
         <History />
-        <BoardContainer dimension={3} />
       </div>
     );
   }
