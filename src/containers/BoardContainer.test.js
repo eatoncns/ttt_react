@@ -16,7 +16,7 @@ describe('<BoardContainer />', () => {
     expect(boardComponents).toHaveLength(1);
   });
 
-  it ('renders a result', () => {
+  it('renders a result', () => {
     const resultComponents = boardContainer.find(Result);
     expect(resultComponents).toHaveLength(1);
   });

@@ -1,0 +1,54 @@
+.Collapsible {
+  margin-top: 22px; 
+  font-size: 15px;
+}
+.Collapsible__trigger {
+  display: block;
+  font-weight: 400;
+  position: relative;
+  border: 1px solid white;
+  padding: 5px;
+  background: #b5b5b5;
+}
+
+.Collapsible__trigger.is-open, .Collapsible__trigger:hover {
+  background-color: #707070;
+}
+
+.Collapsible__trigger:after {
+  content: '\002B';
+  font-weight: bold;
+  position: absolute;
+  right: 10px;
+  top: 4px;
+  display: block;
+}
+
+.Collapsible__trigger.is-open:after {
+  content: "\2212";
+}
+
+.Collapsible__contentInner {
+  padding: 10px;
+  border: 1px solid $lightGrey;
+  border-top: 0;
+}
+
+
+div.history-row {
+  width: 100%;
+  clear: both;
+  padding: 10px;
+  overflow: hidden;
+  border-bottom: 2px solid #707070;
+}
+
+div.history-row>div:nth-child(2n-1) {
+  width: 25%;
+  float: left;
+}
+
+div.history-row>div:nth-child(2n) {
+  width: 75%;
+  float: left;
+}
