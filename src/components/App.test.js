@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { shallow } from 'enzyme';
 import App from './App';
 import BoardContainer from 'containers/BoardContainer';
-import HistoryComponent from 'components/HistoryComponent';
+import History from 'components/History';
 
 describe('<App />', () => {
   it('renders without crashing', () => {
@@ -24,7 +24,7 @@ describe('<App />', () => {
     });
 
     it('renders game history component', () => {
-      const historyComponents = app.find(HistoryComponent);
+      const historyComponents = app.find(History);
       expect(historyComponents).toHaveLength(1);
     });
 

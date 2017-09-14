@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Collapsible from 'react-collapsible';
 import './History.css';
 
-class HistoryComponent extends Component {
+class History extends Component {
   render() {
     return (
       <Collapsible trigger="Previous games">
@@ -12,4 +12,4 @@ class HistoryComponent extends Component {
   }
 }
 
-export default HistoryComponent;
+export default History;
