@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { ResultLogic } from 'ttt/ResultLogic'
 import './Board.css';
 
 function Space(props) {
@@ -18,9 +19,12 @@ class Board extends Component {
     return elements;
   }
 
-  renderSpace(index) {
+  renderSpace(index, gameOver) {
     return (
-      <Space key={index} mark={this.props.marks[index]} handleClick={() => this.props.handleClick(index)} />
+      <Space key={index} 
+             mark={this.props.marks[index]}
+             handleClick={() => this.props.handleClick(index)}
+             gameOver={gameOver} />
     );
   }
 
@@ -33,7 +37,8 @@ class Board extends Component {
   render() {
     const size = this.props.marks.length;
     const dimension = Math.sqrt(size);
-    const spaces = this.renderElements(size, (i) => this.renderSpace(i));
+    const gameOver = ResultLogic.isGameOver(this.props.marks);
+    const spaces = this.renderElements(size, (i) => this.renderSpace(i, gameOver));
     const rows = this.renderElements(dimension, (i) => this.renderRow(i, dimension, spaces));
     return (
       <div className="board">
@@ -45,7 +50,8 @@ class Board extends Component {
 
 Space.propTypes = {
   mark: PropTypes.string.isRequired,
-  handleClick: PropTypes.func.isRequired
+  handleClick: PropTypes.func.isRequired,
+  gameOver: PropTypes.bool.isRequired
 };
 
 Board.propTypes = {

@@ -28,11 +28,13 @@ describe('<Space />', () => {
   let mark;
   let handleClick;
   let space;
+  let gameOver;
 
   beforeEach(() => {
     mark = 'X';
     handleClick = jest.fn();
-    space = shallow(<Space mark={mark} handleClick={handleClick}/>);
+    gameOver = false;
+    space = shallow(<Space mark={mark} handleClick={handleClick} gameOver={gameOver}/>);
   });
 
   it ('renders a button', () => {
