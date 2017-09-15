@@ -4,13 +4,14 @@ import { ResultLogic } from 'ttt/ResultLogic';
 import './Result.css';
 
 function Result(props) {
-  if (!ResultLogic.isGameOver(props.marks))
+  if (!props.boardState.gameOver)
   {
     return null;
   }
-  const message = ResultLogic.isDrawn(props.marks) 
+  const marks = props.boardState.marks;
+  const message = ResultLogic.isDrawn(marks) 
     ? "It's a draw!" 
-    : ResultLogic.winningMark(props.marks) + " wins! Congrats!"; 
+    : ResultLogic.winningMark(marks) + " wins! Congrats!"; 
 
   return(
     <div className="result">
@@ -21,7 +22,10 @@ function Result(props) {
 }
 
 Result.propTypes = {
-  marks: PropTypes.arrayOf(PropTypes.string).isRequired,
+  boardState: PropTypes.shape({
+    marks: PropTypes.arrayOf(PropTypes.string).isRequired,
+    gameOver: PropTypes.bool.isRequired
+  }).isRequired,
   handleClick: PropTypes.func.isRequired
 };
 

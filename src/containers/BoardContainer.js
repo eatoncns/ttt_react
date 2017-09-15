@@ -16,7 +16,7 @@ class BoardContainer extends Component {
     return (
       <div>
         <Board boardState={ this.state } handleClick={ setMark } />
-        <Result marks={ this.state.marks } handleClick={ resetBoard }/>
+        <Result boardState={ this.state } handleClick={ resetBoard }/>
       </div>
     );
   }
