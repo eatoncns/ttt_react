@@ -1,12 +1,16 @@
+import { ResultLogic } from './ResultLogic.js';
+
 export const BoardState = (function() {
   const me = {};
 
-  me.init = (dimension) => ({ marks: Array(dimension*dimension).fill('') });
+  me.init = (dimension) => ({ marks: Array(dimension*dimension).fill(''),
+                              gameOver: false });
 
   me.update = (boardState, index) => {
     const newBoardMarks = boardState.marks.slice();
     newBoardMarks[index] = currentPlayer(boardState);
-    return { marks: newBoardMarks };
+    const isGameOver = ResultLogic.isGameOver(newBoardMarks);
+    return { marks: newBoardMarks, gameOver: isGameOver };
   };
 
   const currentPlayer = (boardState) => {
