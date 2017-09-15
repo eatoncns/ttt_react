@@ -24,12 +24,15 @@ class Board extends Component {
     return elements;
   }
 
-  renderSpace(index, gameOver, winningSpaces) {
+  renderSpace(index, winningSpaces) {
+    const mark = this.props.boardState.marks[index];
+    const handleClick = () => this.props.handleClick(index);
+    const gameOver = this.props.boardState.gameOver;
     const winningSpace = (winningSpaces.indexOf(index) !== -1);
     return (
       <Space key={index} 
-             mark={this.props.marks[index]}
-             handleClick={() => this.props.handleClick(index)}
+             mark={mark}
+             handleClick={handleClick}
              gameOver={gameOver}
              winningSpace={winningSpace} />
     );
@@ -42,11 +45,11 @@ class Board extends Component {
   }
 
   render() {
-    const size = this.props.marks.length;
+    const marks = this.props.boardState.marks;
+    const size = marks.length;
     const dimension = Math.sqrt(size);
-    const gameOver = ResultLogic.isGameOver(this.props.marks);
-    const winningSpaces = ResultLogic.winningSpaces(this.props.marks);
-    const spaces = this.renderElements(size, (i) => this.renderSpace(i, gameOver, winningSpaces));
+    const winningSpaces = ResultLogic.winningSpaces(marks);
+    const spaces = this.renderElements(size, (i) => this.renderSpace(i, winningSpaces));
     const rows = this.renderElements(dimension, (i) => this.renderRow(i, dimension, spaces));
     return (
       <div className="board">
@@ -64,7 +67,10 @@ Space.propTypes = {
 };
 
 Board.propTypes = {
-  marks: PropTypes.arrayOf(PropTypes.string),
+  boardState: PropTypes.shape({
+    marks: PropTypes.arrayOf(PropTypes.string).isRequired,
+    gameOver: PropTypes.bool.isRequired
+  }).isRequired,
   handleClick: PropTypes.func.isRequired
 };
 

@@ -15,7 +15,7 @@ class BoardContainer extends Component {
     const resetBoard = () => this.setState(BoardState.init(this.props.dimension));
     return (
       <div>
-        <Board marks={ this.state.marks } handleClick={ setMark } />
+        <Board boardState={ this.state } handleClick={ setMark } />
         <Result marks={ this.state.marks } handleClick={ resetBoard }/>
       </div>
     );

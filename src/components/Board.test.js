@@ -1,17 +1,16 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import Board, { Space } from './Board';
+import { BoardState } from 'ttt/BoardState';
 
 describe('<Board />', () => {
   let dimension;
-  let marks;
   let board;
 
   beforeEach(() => {
     dimension = 3;
-    marks = Array(dimension*dimension).fill('');
     const handleClick = jest.fn();
-    board = shallow(<Board marks={marks} handleClick={handleClick}/>);
+    board = shallow(<Board boardState={BoardState.init(dimension)} handleClick={handleClick}/>);
   });
 
   it ('renders dimension rows', () => {
