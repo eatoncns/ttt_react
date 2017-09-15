@@ -19,13 +19,15 @@ class BoardContainer extends Component {
     this.setState(nextState);
   }
 
+  resetBoard() {
+    this.setState(BoardState.init(this.props.dimension));
+  }
+
   render() {
-    const setMark = (index) => this.setMark(index);
-    const resetBoard = () => this.setState(BoardState.init(this.props.dimension));
     return (
       <div>
-        <Board boardState={ this.state } handleClick={ setMark } />
-        <Result boardState={ this.state } handleClick={ resetBoard }/>
+        <Board boardState={ this.state } handleClick={ (index) => this.setMark(index) } />
+        <Result boardState={ this.state } handleClick={ () => this.resetBoard() }/>
       </div>
     );
   }
