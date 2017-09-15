@@ -9,6 +9,15 @@ class TicTacToeContainer extends Component {
     this.state = HistoryState.init();
   }
 
+  onGameOver(finalMarks) {
+    const nextState = HistoryState.update(this.state, finalMarks, dateTimeNow);
+    this.setState({nextState});
+  }
+
+  dateTimeNow() {
+    return (new Date().toLocaleDateString('en-GB'));
+  }
+
   render() {
     return (
       <div>
