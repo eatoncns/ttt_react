@@ -11,6 +11,10 @@ describe ('BoardState', () => {
     it ('initialises an empty board', () => {
       expect(BoardState.init(dimension).marks).toEqual(['', '', '', '', '', '', '', '', '']);
     }); 
+
+    it('initialises game over to false', () => {
+      expect(BoardState.init(dimension).gameOver).toEqual(false);
+    });
   });
 
   describe('#update', () => {
@@ -27,10 +31,21 @@ describe ('BoardState', () => {
     });
 
     it ('alternates between players', () => {
-      const s1 = BoardState.update(boardState, index);
-      const s2 = BoardState.update(s1, index+1);
-      const s3 = BoardState.update(s2, index+2);
-      expect(s3.marks).toEqual(['', '', '', 'X', 'O', 'X', '', '', '']);
+      const moveSequence = [index, index+1, index+2];
+      const finalState = moveSequence.reduce(BoardState.update, boardState);
+      expect(finalState.marks).toEqual(['', '', '', 'X', 'O', 'X', '', '', '']);
+    });
+
+    it('updates gameOver when game is in complete state', () => {
+      const winningMoveSequence = [0, 3, 1, 4, 2];
+      const finalState = winningMoveSequence.reduce(BoardState.update, boardState);
+      expect(finalState.gameOver).toEqual(true);
+    });
+
+    it('does not update gameOver until game is in complete state', () => {
+      const moveSequence = [0, 3, 1, 4];
+      const finalState = moveSequence.reduce(BoardState.update, boardState);
+      expect(finalState.gameOver).toEqual(false);
     });
   });
 

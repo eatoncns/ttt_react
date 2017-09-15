@@ -2,8 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { shallow } from 'enzyme';
 import App from './App';
-import BoardContainer from 'containers/BoardContainer';
-import History from 'components/History';
+import TicTacToeContainer from 'containers/TicTacToeContainer';
 
 describe('<App />', () => {
   it('renders without crashing', () => {
@@ -11,23 +10,9 @@ describe('<App />', () => {
     ReactDOM.render(<App />, div);
   });
 
-  describe('component rendering', () => {
-    let app;
-
-    beforeEach(() => {
-      app = shallow(<App />);
-    });
-
-    it ('renders a board container', () => {
-      const boardContainers = app.find(BoardContainer);
-      expect(boardContainers).toHaveLength(1);
-    });
-
-    it('renders game history component', () => {
-      const historyComponents = app.find(History);
-      expect(historyComponents).toHaveLength(1);
-    });
-
+  it ('renders a tic-tac-toe container', () => {
+    const app = shallow(<App />);
+    const tttContainers = app.find(TicTacToeContainer);
+    expect(tttContainers).toHaveLength(1);
   });
-
 });
