@@ -8,7 +8,9 @@ describe('<BoardContainer />', () => {
   let boardContainer;
 
   beforeEach(() => {
-    boardContainer = shallow(<BoardContainer dimension={4} />);
+    const onGameOver = jest.fn();
+    boardContainer = shallow(<BoardContainer dimension={4} 
+                                             onGameOver={onGameOver}/>);
   });
 
   it('renders a board', () => {

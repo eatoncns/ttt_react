@@ -9,25 +9,24 @@ class TicTacToeContainer extends Component {
     this.state = HistoryState.init();
   }
 
-  onGameOver(finalMarks) {
-    const nextState = HistoryState.update(this.state, finalMarks, dateTimeNow);
-    this.setState({nextState});
-  }
-
-  dateTimeNow() {
-    return (new Date().toLocaleDateString('en-GB'));
-  }
-
   render() {
+    const onGameOver = (finalMarks) => {
+      this.setState(HistoryState.update(this.state, finalMarks, this.dateTimeNow));
+    };
     return (
       <div>
         <div className="container">
           <h1>Tic-Tac-Toe</h1>
-          <BoardContainer dimension={3} />
+          <BoardContainer dimension={3}
+                          onGameOver={onGameOver} />
         </div>
         <History games={this.state.games} />
       </div>
     );
+  }
+
+  dateTimeNow() {
+    return (new Date().toLocaleString('en-GB'));
   }
 }
 
