@@ -6,11 +6,12 @@ import './History.css';
 
 function HistoryRow(props) {
   const game = props.game;
+  const timestamp = new Date(game.timestamp).toLocaleString();
   const boardState = {marks: game.finalMarks, gameOver: true};
   const noop = () => null;
   return (
     <div className="history-row">
-      <div>{game.timestamp}</div>
+      <div>{timestamp}</div>
       <div>{game.result}</div>
       <Collapsible trigger="Final board"> 
         <Board boardState={boardState} handleClick={noop} />

@@ -26,15 +26,15 @@ describe('HistoryRow />', () => {
   let rowDiv;
 
   beforeEach(() => {
-    game = {timestamp: "14/09/2017, 09:45:48",             
+    game = {timestamp: "2017-09-18T16:10:53.246Z",             
             result: "X win",
             finalMarks: ['X','X','X','O','O','','','','']};
     historyRow = shallow(<HistoryRow game={game} />)
     rowDiv = historyRow.find('.history-row');
   });
 
-  it('renders game timestamp', () => {
-    expect(rowDiv.text()).toEqual(expect.stringContaining('14/09/2017, 09:45:48'));
+  it('renders game timestamp according to locale', () => {
+    expect(rowDiv.text()).toEqual(expect.stringContaining('2017-9-18 17:10:53'));
   });
 
   it('renders game result', () => {

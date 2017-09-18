@@ -36,7 +36,7 @@ class TicTacToeContainer extends Component {
   }
 
   dateTimeNow() {
-    return (new Date().toLocaleString('en-GB'));
+    return (new Date().toISOString());
   }
 
   render() {
