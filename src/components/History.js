@@ -6,12 +6,11 @@ import './History.css';
 
 function HistoryRow(props) {
   const game = props.game;
-  const timestamp = new Date(game.timestamp).toLocaleString();
   const boardState = {marks: game.finalMarks, gameOver: true};
   const noop = () => null;
   return (
     <div className="history-row">
-      <div>{timestamp}</div>
+      <div>{props.localise(game.timestamp)}</div>
       <div>{game.result}</div>
       <Collapsible trigger="Final board"> 
         <Board boardState={boardState} handleClick={noop} />
@@ -22,7 +21,10 @@ function HistoryRow(props) {
 
 class History extends Component {
   render() {
-    const historyRows = this.props.games.map((game, index) => <HistoryRow key={index} game={game}/>);
+    const localise = (timestamp) => new Date(timestamp).toLocaleString();
+    const historyRows = this.props.games.map((game, index) => <HistoryRow key={index}
+                                                                          game={game}
+                                                                          localise={localise} />);
     return (
       <Collapsible trigger="Previous games">
         {historyRows} 
@@ -42,7 +44,8 @@ History.propTypes = {
 };
 
 HistoryRow.propTypes = {
-  game: gamePropType.isRequired
+  game: gamePropType.isRequired,
+  localise: PropTypes.func.isRequired
 };
 
 export { HistoryRow };

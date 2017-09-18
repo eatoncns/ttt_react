@@ -29,12 +29,13 @@ describe('HistoryRow />', () => {
     game = {timestamp: "2017-09-18T16:10:53.246Z",             
             result: "X win",
             finalMarks: ['X','X','X','O','O','','','','']};
-    historyRow = shallow(<HistoryRow game={game} />)
+    const localise = jest.fn((timestamp) => timestamp + ' local');
+    historyRow = shallow(<HistoryRow game={game} localise={localise} />)
     rowDiv = historyRow.find('.history-row');
   });
 
   it('renders game timestamp according to locale', () => {
-    expect(rowDiv.text()).toEqual(expect.stringContaining('2017-9-18 17:10:53'));
+    expect(rowDiv.text()).toEqual(expect.stringContaining('2017-09-18T16:10:53.246Z local'));
   });
 
   it('renders game result', () => {
