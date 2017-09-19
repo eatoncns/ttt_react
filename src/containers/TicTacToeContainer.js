@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import History from 'components/History';
 import BoardContainer from 'containers/BoardContainer';
 import { HistoryState } from 'ttt/HistoryState';
+import { HistoryApi } from 'ttt/HistoryApi';
 
 class TicTacToeContainer extends Component {
   constructor(props) {
@@ -10,29 +11,22 @@ class TicTacToeContainer extends Component {
   }
 
   componentDidMount() {
-    const endpoint = 'http://ttt-history-dev.eu-west-2.elasticbeanstalk.com/history';
-    fetch(endpoint).then((response) => this.checkResponse(response))
-                   .then((responseJson) => this.populateInitialState(responseJson))
-                   .catch((error) => console.log(error.message));
+      HistoryApi.getHistory().then((history) => this.populateInitialState(history))
+                             .catch((error) => console.log(error.message));
   }
 
-  checkResponse(response) {
-    if (response.ok) {
-      return response.json();
-    }
-    throw new Error('Network response was not ok');
-  }
-
-  populateInitialState(responseJson) {
-    const games = responseJson.games;
+  populateInitialState(history) {
+    const games = history.games;
     const newState = games.reduce((state, game) => {
-      return HistoryState.update(state, game.board, () => game.timestamp); 
+      return HistoryState.update(state, game.board, game.timestamp); 
     }, this.state);
     this.setState(newState);
   }
 
   onGameOver(finalMarks) {
-    this.setState(HistoryState.update(this.state, finalMarks, this.dateTimeNow));
+    const timestamp = this.dateTimeNow();
+    this.setState(HistoryState.update(this.state, finalMarks, timestamp));
+    HistoryApi.updateHistory(finalMarks, timestamp);
   }
 
   dateTimeNow() {

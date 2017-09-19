@@ -7,10 +7,10 @@ export const HistoryState = (function() {
     return { games: [] };
   };
 
-  me.update = (state, newMarks, dateTimeFunction)  => {
+  me.update = (state, newMarks, dateTime)  => {
     const updatedGames = state.games.slice();
     const newGame = {
-      timestamp: dateTimeFunction(),
+      timestamp: dateTime,
       result: resultFrom(newMarks),
       finalMarks: newMarks
     };
