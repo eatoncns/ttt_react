@@ -8,7 +8,6 @@ class TicTacToeContainer extends Component {
   constructor(props) {
     super(props);
     this.state = HistoryState.init();
-    this.endpoint = 'http://ttt-history-dev.eu-west-2.elasticbeanstalk.com/history';
   }
 
   componentDidMount() {
