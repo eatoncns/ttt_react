@@ -26,13 +26,13 @@ class TicTacToeContainer extends Component {
   populateInitialState(responseJson) {
     const games = responseJson.games;
     const newState = games.reduce((state, game) => {
-      return HistoryState.update(state, game.board, () => game.timestamp); 
+      return HistoryState.update(state, game.board, game.timestamp); 
     }, this.state);
     this.setState(newState);
   }
 
   onGameOver(finalMarks) {
-    this.setState(HistoryState.update(this.state, finalMarks, this.dateTimeNow));
+    this.setState(HistoryState.update(this.state, finalMarks, this.dateTimeNow()));
   }
 
   dateTimeNow() {

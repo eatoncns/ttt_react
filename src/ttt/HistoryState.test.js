@@ -14,15 +14,14 @@ describe('HistoryState', () => {
   });
   
   describe('#update', () => {
-    let dummyDateTime = () => '14/09/2017, 09:45:48';
-
     it('updates games with new final state', () => {
       const finalMarks = ['X','X','X','O','O','','','',''];
-      const updatedState = HistoryState.update(initialState, finalMarks, dummyDateTime);
+      const dateTime = '2017-09-19T09:13:04.000Z';
+      const updatedState = HistoryState.update(initialState, finalMarks, dateTime);
       const expectedGame = {
-        timestamp: "14/09/2017, 09:45:48",
+        timestamp: dateTime,
         result: "X win",
-        finalMarks: ['X','X','X','O','O','','','','']
+        finalMarks: finalMarks
       };
       expect(updatedState.games[0]).toEqual(expectedGame);
     });
