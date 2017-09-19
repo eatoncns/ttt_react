@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import History from 'components/History';
 import BoardContainer from 'containers/BoardContainer';
 import { HistoryState } from 'ttt/HistoryState';
+import { HistoryApi } from 'ttt/HistoryApi';
 
 class TicTacToeContainer extends Component {
   constructor(props) {
@@ -11,20 +12,12 @@ class TicTacToeContainer extends Component {
   }
 
   componentDidMount() {
-    fetch(this.endpoint).then((response) => this.checkResponse(response))
-                        .then((responseJson) => this.populateInitialState(responseJson))
-                        .catch((error) => console.log(error.message));
+      HistoryApi.getHistory().then((history) => this.populateInitialState(history))
+                             .catch((error) => console.log(error.message));
   }
 
-  checkResponse(response) {
-    if (response.ok) {
-      return response.json();
-    }
-    throw new Error('Network response was not ok');
-  }
-
-  populateInitialState(responseJson) {
-    const games = responseJson.games;
+  populateInitialState(history) {
+    const games = history.games;
     const newState = games.reduce((state, game) => {
       return HistoryState.update(state, game.board, game.timestamp); 
     }, this.state);
@@ -34,20 +27,7 @@ class TicTacToeContainer extends Component {
   onGameOver(finalMarks) {
     const timestamp = this.dateTimeNow();
     this.setState(HistoryState.update(this.state, finalMarks, timestamp));
-    this.pushGameToBackend(finalMarks, timestamp);
-  }
-
-  pushGameToBackend(finalMarks, timestamp) {
-    fetch(this.endpoint, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        timestamp: timestamp,
-        board: finalMarks
-      })
-    });
+    HistoryApi.updateHistory(finalMarks, timestamp);
   }
 
   dateTimeNow() {
